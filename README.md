@@ -27,12 +27,14 @@ python task2.py<br>
 Citation
 --------
 If you find this useful for your research, please kindly cite the following paper:<br>
+'''
 @article{AGCN2020,
   title={Joint Item Recommendation and Attribute Inference: An Adaptive Graph Convolutional Network Approach},
   author={Le Wu, Yonghui Yang, Kun Zhang, Richang Hong, Yanjie Fu and Meng Wang}
   jconference={43nd International ACM SIGIR Conference on Research and Development in Information Retrieval},
   year={2020}
 }
+'''
 
 Author contact:
 --------------
