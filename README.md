@@ -12,3 +12,17 @@ Prerequisites
 * Python 3.6
 * NVIDIA GPU + CUDA CuDNN
 
+Usage
+-----
+* Dataset:
+Under the data folder(cd ./data)
+* Item Recommendation Task:
+cd ./code
+python train_task1.py
+python test_task1.py
+* Attributes Inference Task:
+cd ./code
+python task2.py
+
+
+
