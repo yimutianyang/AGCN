@@ -14,15 +14,15 @@ Prerequisites
 
 Usage
 -----
-* Dataset:
+* Dataset:<br>
 Under the data folder(cd ./data)
-* Item Recommendation Task:
-cd ./code
-python train_task1.py
-python test_task1.py
-* Attributes Inference Task:
-cd ./code
-python task2.py
+* Item Recommendation Task:<br>
+cd ./code<br>
+python train_task1.py<br>
+python test_task1.py<br>
+* Attributes Inference Task:<br>
+cd ./code<br>
+python task2.py<br>
 
 
 
