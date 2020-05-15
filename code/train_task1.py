@@ -17,7 +17,6 @@ from shutil import copyfile
 ### parameter ###
 runid = 100
 device_id = 0
-layers = 2
 dimension = 32
 learning_rate = 0.001
 epochs = 100
@@ -140,7 +139,7 @@ def gcn_model(propagation_layers):
         feature_matrix = feature_matrix + neighbor_matrix
         k += 1
     return feature_matrix  
-feature_matrix = gcn_model(layers)
+feature_matrix = gcn_model(2)
 final_user_emb, final_item_emb = tf.split(feature_matrix,[user_count,item_count],0)
 
 
