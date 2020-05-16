@@ -146,7 +146,7 @@ sess.run(tf.local_variables_initializer())
 
 
 ### start test ###
-all_best_ckpt = np.load(base_path+'/all_best_ckpt.npy').tolist()
+all_best_ckpt = np.load(base_path+'all_best_ckpt.npy').tolist()
 for k in range(len(all_best_ckpt)):
     print(all_best_ckpt[k])
     evaluate_txt.write('update_count:'+str(k)+'\n')
