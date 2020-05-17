@@ -71,19 +71,16 @@ inference_w = tf.Variable(tf.random_normal([52, 20], stddev=0.01), name='inferen
 inference_b = tf.Variable(tf.zeros([20]), name='inference_b')
 
 
-def gcn_model(propagation_layers):
-    adjacent_matrix = tf.SparseTensor(indices=A_indexs, values=A_values, dense_shape=[user_count+item_count, user_count+item_count]) #[m+n, m+n]
-    initial_user_emb = tf.concat([user_emb,user_attri_emb],1) #[m, d1+d2]
-    initial_item_emb = tf.concat([item_emb,item_attri_emb],1) #[n, d1+d2]
-    feature_matrix = tf.concat([initial_user_emb,initial_item_emb],0) #[m+n, d1+d2]
-    k = 0     
-    while k < propagation_layers:
-        neighbor_matrix = tf.sparse_tensor_dense_matmul(adjacent_matrix, feature_matrix) #[m+n, d1+d2]
-        feature_matrix = feature_matrix + neighbor_matrix
-        k += 1
-    return feature_matrix  
-feature_matrix = gcn_model(2)
-final_user_emb, final_item_emb = tf.split(feature_matrix,[user_count,item_count],0)
+adjacent_matrix = tf.SparseTensor(indices=A_indexs, values=A_values, dense_shape=[user_count+item_count, user_count+item_count]) #[m+n, m+n]
+initial_user_emb = tf.concat([user_emb,user_attri_emb],1) #[m, d1+d2]
+initial_item_emb = tf.concat([item_emb,item_attri_emb],1) #[n, d1+d2]
+feature_matrix_layer0 = tf.concat([initial_user_emb,initial_item_emb],0) #[m+n, d1+d2]
+neighbor_matrix_layer1 = tf.sparse_tensor_dense_matmul(adjacent_matrix, feature_matrix_layer0)
+feature_matrix_layer1 = tf.add(feature_matrix_layer0, neighbor_matrix_layer1)
+neighbor_matrix_layer2 = tf.sparse_tensor_dense_matmul(adjacent_matrix, feature_matrix_layer1)
+feature_matrix_layer2 = tf.add(feature_matrix_layer1, neighbor_matrix_layer2)
+final_user_emb, final_item_emb = tf.split(feature_matrix_layer2,[user_count,item_count],0)
+
 
 
 # link prediction part
@@ -146,7 +143,7 @@ sess.run(tf.local_variables_initializer())
 
 
 ### start test ###
-all_best_ckpt = np.load(base_path+'all_best_ckpt.npy').tolist()
+all_best_ckpt = np.load(base_path+'/all_best_ckpt.npy').tolist()
 for k in range(len(all_best_ckpt)):
     print(all_best_ckpt[k])
     evaluate_txt.write('update_count:'+str(k)+'\n')
