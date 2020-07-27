@@ -67,6 +67,27 @@ def get_1000_negatives(rating_all, negatives_sample=1000):
     return user_negatives_1000
 user_negatives_1000 = get_1000_negatives(user_items)      
 
+def get_train_adj_matrix(train_rating):
+    '''
+    get adjacent matrix of traindata#
+    '''
+    item_user_train = defaultdict(set)
+    for key in train_rating.keys():
+        for i in train_rating[key]:
+            item_user_train[i].add(key)
+    A_indexs = []
+    A_values = []
+    for x in train_rating.keys():
+        len_u = len(train_rating[x])
+        for i in range(len(train_rating[x])):
+            y = train_rating[x][i] + user_count
+            len_v = len(item_user_train[i])
+            A_indexs.append([x,y])
+            A_values.append(1/len_u)
+            A_indexs.append([y,x])
+            #A_values.append(1/len_u)
+            A_values.append(1/len_v)
+    return A_indexs, A_values
 
 def get_bpr_data(rating_all, rating_train, item_count, neg_sample):
     '''
