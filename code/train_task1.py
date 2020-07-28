@@ -266,7 +266,7 @@ for update_count in range(10):
         print('train time:',round(tt2-tt1,4))
     
         #val part
-        _hr,_ndcg = get_metrics(testdata, user_items, [10]) 
+        _hr,_ndcg = get_metrics(valdata, user_items, [10]) 
         hr = _hr[10]
         ndcg = _ndcg[10]
         valhr.append(hr)
