@@ -79,8 +79,8 @@ def get_train_adj_matrix(train_rating):
     A_values = []
     for x in train_rating.keys():
         len_u = len(train_rating[x])
-        for i in range(len(train_rating[x])):
-            y = train_rating[x][i] + user_count
+        for i in train_rating[x]:
+            y = i + user_count
             len_v = len(item_user_train[i])
             A_indexs.append([x,y])
             A_values.append(1/len_u)
