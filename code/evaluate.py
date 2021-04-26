@@ -171,8 +171,8 @@ def get_1000_negatives(rating_all, item_count, negatives_sample=1000):
 def get_missing_attributes(missing_rate, item_count):
     '''
     根据missing_rate随机删除item attributes
-    1.初始化profiel矩阵为0
-    2.分别随机抽取存在不同profile的用户列表
+    1.初始化item attributes矩阵为0
+    2.分别随机抽取存在不同attributes的产品列表
     3.根据2填充1
     '''
     itemset = set(range(item_count))
